@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Send, Github, Linkedin, Mail, Phone } from "lucide-react";
 
