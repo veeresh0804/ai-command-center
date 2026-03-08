@@ -86,7 +86,7 @@ const SkillNode = forwardRef<THREE.Group, {
 
 SkillNode.displayName = "SkillNode";
 
-function CategoryRing({ category, index }: { category: typeof skillCategories[0]; index: number }) {
+const CategoryRing = forwardRef<THREE.Group, { category: typeof skillCategories[0]; index: number }>(({ category, index }, ref) => {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((_, delta) => {
@@ -127,7 +127,9 @@ function CategoryRing({ category, index }: { category: typeof skillCategories[0]
       ))}
     </group>
   );
-}
+});
+
+CategoryRing.displayName = "CategoryRing";
 
 function CentralCore() {
   const meshRef = useRef<THREE.Mesh>(null);
