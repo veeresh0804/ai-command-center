@@ -131,7 +131,7 @@ const CategoryRing = forwardRef<THREE.Group, { category: typeof skillCategories[
 
 CategoryRing.displayName = "CategoryRing";
 
-function CentralCore() {
+const CentralCore = forwardRef<THREE.Group>((_, ref) => {
   const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
@@ -142,7 +142,7 @@ function CentralCore() {
   });
 
   return (
-    <group>
+    <group ref={ref}>
       <mesh ref={meshRef}>
         <icosahedronGeometry args={[0.6, 1]} />
         <meshStandardMaterial
@@ -173,7 +173,9 @@ function CentralCore() {
       </Billboard>
     </group>
   );
-}
+});
+
+CentralCore.displayName = "CentralCore";
 
 function GalaxyScene() {
   const { camera } = useThree();
