@@ -1,15 +1,20 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
+import StatsSection from "@/components/StatsSection";
 import SkillsSection from "@/components/SkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import TimelineSection from "@/components/TimelineSection";
 import CertificationsSection from "@/components/CertificationsSection";
+import GitHubActivitySection from "@/components/GitHubActivitySection";
+import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
+import BackToTop from "@/components/BackToTop";
+import CustomCursor from "@/components/CustomCursor";
 import LoadingScreen from "@/components/LoadingScreen";
 import { SectionDivider, SectionWrapper } from "@/components/ScrollAnimations";
 
@@ -20,6 +25,8 @@ const Index = () => {
 
   return (
     <>
+      <CustomCursor />
+
       <AnimatePresence>
         {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
       </AnimatePresence>
@@ -46,6 +53,11 @@ const Index = () => {
 
         <SectionWrapper>
           <SectionDivider />
+          <StatsSection />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
           <SkillsSection />
         </SectionWrapper>
 
@@ -66,11 +78,22 @@ const Index = () => {
 
         <SectionWrapper>
           <SectionDivider />
+          <GitHubActivitySection />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
+          <BlogSection />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
           <ContactSection />
         </SectionWrapper>
 
         <Footer />
         <ChatBot />
+        <BackToTop />
       </motion.div>
     </>
   );

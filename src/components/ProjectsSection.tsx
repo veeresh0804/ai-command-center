@@ -2,7 +2,8 @@ import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Github, Filter } from "lucide-react";
 import { projectsData } from "@/data/portfolio";
-import { ScrollReveal, ScaleOnScroll } from "./ScrollAnimations";
+import { ScrollReveal } from "./ScrollAnimations";
+import ProjectModal from "./ProjectModal";
 import projectShodhani from "@/assets/project-shodhani.jpg";
 import projectArivucode from "@/assets/project-arivucode.jpg";
 import projectEraksha from "@/assets/project-eraksha.jpg";
@@ -19,6 +20,7 @@ const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [filter, setFilter] = useState("All");
+  const [selectedProject, setSelectedProject] = useState<typeof projectsData[0] | null>(null);
 
   const filtered = filter === "All" ? projectsData : projectsData.filter((p) => p.category === filter);
 
@@ -60,7 +62,8 @@ const ProjectsSection = () => {
             <ScrollReveal key={project.id} delay={0.1 * i} direction={i % 2 === 0 ? "up" : "left"}>
               <motion.div
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="glass-card hover-glow group overflow-hidden rounded-xl border transition-all h-full"
+                onClick={() => setSelectedProject(project)}
+                className="glass-card hover-glow group cursor-pointer overflow-hidden rounded-xl border transition-all h-full"
               >
                 <div className="h-40 w-full overflow-hidden">
                   <img
@@ -104,6 +107,12 @@ const ProjectsSection = () => {
             </ScrollReveal>
           ))}
         </div>
+
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+          image={selectedProject ? projectImages[selectedProject.title] : undefined}
+        />
       </div>
     </section>
   );
