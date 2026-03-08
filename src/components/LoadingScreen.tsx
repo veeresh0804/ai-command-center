@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const bootSequence = [
@@ -70,25 +70,39 @@ const Particles = () => {
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [visibleLines, setVisibleLines] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
+  const completedRef = useRef(false);
 
   useEffect(() => {
-    if (visibleLines < bootSequence.length) {
-      const line = bootSequence[visibleLines];
-      const delay = line.type === "welcome" ? 500 : line.type === "success" ? 300 : 120 + Math.random() * 130;
-      const timer = setTimeout(() => setVisibleLines(v => v + 1), delay);
-      return () => clearTimeout(timer);
-    } else {
-      const timer = setTimeout(() => setFadeOut(true), 800);
-      return () => clearTimeout(timer);
-    }
-  }, [visibleLines]);
+    // Use a single interval-based approach for reliability
+    let lineIndex = 0;
+    const interval = setInterval(() => {
+      lineIndex++;
+      if (lineIndex >= bootSequence.length) {
+        clearInterval(interval);
+        setVisibleLines(bootSequence.length);
+        setTimeout(() => setFadeOut(true), 600);
+      } else {
+        setVisibleLines(lineIndex);
+      }
+    }, 150);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
-    if (fadeOut) {
+    if (fadeOut && !completedRef.current) {
+      completedRef.current = true;
       const timer = setTimeout(onComplete, 800);
       return () => clearTimeout(timer);
     }
   }, [fadeOut, onComplete]);
+
+  const skipLoading = () => {
+    if (!completedRef.current) {
+      completedRef.current = true;
+      setFadeOut(true);
+      setTimeout(onComplete, 300);
+    }
+  };
 
   const progress = Math.round((visibleLines / bootSequence.length) * 100);
 
@@ -111,7 +125,8 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           key="loader"
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background cursor-pointer"
+          onClick={skipLoading}
         >
           {/* Ambient glows */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(183_100%_50%_/_0.06)_0%,_transparent_70%)]" />
