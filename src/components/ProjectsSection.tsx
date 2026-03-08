@@ -62,7 +62,8 @@ const ProjectsSection = () => {
             <ScrollReveal key={project.id} delay={0.1 * i} direction={i % 2 === 0 ? "up" : "left"}>
               <motion.div
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="glass-card hover-glow group overflow-hidden rounded-xl border transition-all h-full"
+                onClick={() => setSelectedProject(project)}
+                className="glass-card hover-glow group cursor-pointer overflow-hidden rounded-xl border transition-all h-full"
               >
                 <div className="h-40 w-full overflow-hidden">
                   <img
