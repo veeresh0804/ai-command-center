@@ -2,8 +2,10 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { MessageSquare, X, Send, Bot } from "lucide-react";
 
-const initialMessages = [
-  { role: "assistant" as const, content: "Hello! I'm the AI assistant for this portfolio. Ask me about the developer's projects, skills, or experience!" },
+type Message = { role: "user" | "assistant"; content: string };
+
+const initialMessages: Message[] = [
+  { role: "assistant", content: "Hello! I'm the AI assistant for this portfolio. Ask me about the developer's projects, skills, or experience!" },
 ];
 
 const ChatBot = () => {
