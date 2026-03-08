@@ -1,4 +1,4 @@
-import { useRef, ReactNode } from "react";
+import { useRef, forwardRef, ReactNode } from "react";
 import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 
 // ─── ScrollReveal ───────────────────────────────────────
