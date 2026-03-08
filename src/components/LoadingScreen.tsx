@@ -125,7 +125,8 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           key="loader"
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background cursor-pointer"
+          onClick={skipLoading}
         >
           {/* Ambient glows */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(183_100%_50%_/_0.06)_0%,_transparent_70%)]" />
