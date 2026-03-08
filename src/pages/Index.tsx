@@ -5,7 +5,10 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import StatsSection from "@/components/StatsSection";
 import SkillsSection from "@/components/SkillsSection";
+import SkillsGalaxy from "@/components/SkillsGalaxy";
 import ProjectsSection from "@/components/ProjectsSection";
+import ProjectPlayground from "@/components/ProjectPlayground";
+import MLVisualizationsSection from "@/components/MLVisualizationsSection";
 import TimelineSection from "@/components/TimelineSection";
 import CertificationsSection from "@/components/CertificationsSection";
 import GitHubActivitySection from "@/components/GitHubActivitySection";
@@ -63,7 +66,22 @@ const Index = () => {
 
         <SectionWrapper>
           <SectionDivider />
+          <SkillsGalaxy />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
           <ProjectsSection />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
+          <ProjectPlayground />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
+          <MLVisualizationsSection />
         </SectionWrapper>
 
         <SectionWrapper>
