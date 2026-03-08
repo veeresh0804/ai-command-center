@@ -2,7 +2,8 @@ import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Github, Filter } from "lucide-react";
 import { projectsData } from "@/data/portfolio";
-import { ScrollReveal, ScaleOnScroll } from "./ScrollAnimations";
+import { ScrollReveal } from "./ScrollAnimations";
+import ProjectModal from "./ProjectModal";
 import projectShodhani from "@/assets/project-shodhani.jpg";
 import projectArivucode from "@/assets/project-arivucode.jpg";
 import projectEraksha from "@/assets/project-eraksha.jpg";
@@ -19,6 +20,7 @@ const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [filter, setFilter] = useState("All");
+  const [selectedProject, setSelectedProject] = useState<typeof projectsData[0] | null>(null);
 
   const filtered = filter === "All" ? projectsData : projectsData.filter((p) => p.category === filter);
 
