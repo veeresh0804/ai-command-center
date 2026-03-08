@@ -28,7 +28,9 @@ export const ScrollReveal = forwardRef<HTMLDivElement, ScrollRevealProps>(({ chi
       {children}
     </motion.div>
   );
-};
+});
+
+ScrollReveal.displayName = "ScrollReveal";
 
 // ─── Parallax ───────────────────────────────────────────
 interface ParallaxProps {
