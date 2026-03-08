@@ -149,7 +149,8 @@ const HeroSection = () => {
               CONTACT ME
             </a>
             <a
-              href="#"
+              href="/resume.pdf"
+              download
               className="flex items-center gap-2 rounded-lg border border-accent/30 px-8 py-3 font-display text-sm font-semibold tracking-wider text-accent transition-all hover:bg-accent/10"
             >
               <Download className="h-4 w-4" />

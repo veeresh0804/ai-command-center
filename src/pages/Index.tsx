@@ -11,6 +11,7 @@ import ProjectPlayground from "@/components/ProjectPlayground";
 import MLVisualizationsSection from "@/components/MLVisualizationsSection";
 import TimelineSection from "@/components/TimelineSection";
 import CertificationsSection from "@/components/CertificationsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import GitHubActivitySection from "@/components/GitHubActivitySection";
 import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
@@ -40,74 +41,27 @@ const Index = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
         className={`min-h-screen bg-background scroll-smooth ${loading ? "overflow-hidden h-screen" : ""}`}
       >
-        {/* Scroll progress bar */}
         <motion.div
           className="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left"
-          style={{ scaleX, background: "linear-gradient(90deg, hsl(183 100% 50%), hsl(263 84% 52%))" }}
+          style={{ scaleX, background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)))" }}
         />
 
         <Navbar />
         <HeroSection />
 
-        <SectionWrapper>
-          <SectionDivider />
-          <AboutSection />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <StatsSection />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <SkillsSection />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <SkillsGalaxy />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <ProjectsSection />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <ProjectPlayground />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <MLVisualizationsSection />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <TimelineSection />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <CertificationsSection />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <GitHubActivitySection />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <BlogSection />
-        </SectionWrapper>
-
-        <SectionWrapper>
-          <SectionDivider />
-          <ContactSection />
-        </SectionWrapper>
+        <SectionWrapper><SectionDivider /><AboutSection /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><StatsSection /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><SkillsSection /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><SkillsGalaxy /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><ProjectsSection /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><ProjectPlayground /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><MLVisualizationsSection /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><TimelineSection /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><CertificationsSection /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><TestimonialsSection /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><GitHubActivitySection /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><BlogSection /></SectionWrapper>
+        <SectionWrapper><SectionDivider /><ContactSection /></SectionWrapper>
 
         <Footer />
         <ChatBot />
