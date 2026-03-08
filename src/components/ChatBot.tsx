@@ -95,6 +95,8 @@ const ChatBot = forwardRef<HTMLDivElement>((_, ref) => {
       </AnimatePresence>
     </>
   );
-};
+});
+
+ChatBot.displayName = "ChatBot";
 
 export default ChatBot;
