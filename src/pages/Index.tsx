@@ -33,11 +33,8 @@ const Index = () => {
         {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
       </AnimatePresence>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: loading ? 0 : 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className={`min-h-screen bg-background scroll-smooth ${loading ? "overflow-hidden h-screen" : ""}`}
+      <div
+        className={`min-h-screen bg-background scroll-smooth transition-opacity duration-700 ${loading ? "opacity-0 overflow-hidden h-screen" : "opacity-100"}`}
       >
         <motion.div
           className="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left"
