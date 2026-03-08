@@ -1,6 +1,7 @@
 import { useRef, ReactNode } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 
+// ─── ScrollReveal ───────────────────────────────────────
 interface ScrollRevealProps {
   children: ReactNode;
   direction?: "up" | "down" | "left" | "right";
@@ -9,8 +10,6 @@ interface ScrollRevealProps {
 }
 
 export const ScrollReveal = ({ children, direction = "up", delay = 0, className = "" }: ScrollRevealProps) => {
-  const ref = useRef(null);
-
   const dirMap = {
     up: { y: 60, x: 0 },
     down: { y: -60, x: 0 },
@@ -20,10 +19,9 @@ export const ScrollReveal = ({ children, direction = "up", delay = 0, className 
 
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, ...dirMap[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] }}
       className={className}
     >
@@ -32,6 +30,7 @@ export const ScrollReveal = ({ children, direction = "up", delay = 0, className 
   );
 };
 
+// ─── Parallax ───────────────────────────────────────────
 interface ParallaxProps {
   children: ReactNode;
   speed?: number;
@@ -55,20 +54,16 @@ export const Parallax = ({ children, speed = 0.3, className = "" }: ParallaxProp
   );
 };
 
-interface ScaleOnScrollProps {
-  children: ReactNode;
-  className?: string;
-}
-
-export const ScaleOnScroll = ({ children, className = "" }: ScaleOnScrollProps) => {
+// ─── ScaleOnScroll ──────────────────────────────────────
+export const ScaleOnScroll = ({ children, className = "" }: { children: ReactNode; className?: string }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.9, 1, 1, 0.95]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.3, 1, 1, 0.3]);
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, 1, 1, 0.96]);
+  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.2, 1, 1, 0.2]);
 
   return (
     <motion.div ref={ref} style={{ scale, opacity }} className={className}>
@@ -77,14 +72,91 @@ export const ScaleOnScroll = ({ children, className = "" }: ScaleOnScrollProps) 
   );
 };
 
+// ─── FadeBlur ───────────────────────────────────────────
+// Elements blur out as they scroll past the viewport
+export const FadeBlur = ({ children, className = "" }: { children: ReactNode; className?: string }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const filter = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [
+    "blur(8px)", "blur(0px)", "blur(0px)", "blur(8px)"
+  ]);
+
+  return (
+    <motion.div ref={ref} style={{ opacity, filter }} className={className}>
+      {children}
+    </motion.div>
+  );
+};
+
+// ─── Stagger Container ─────────────────────────────────
+export const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+export const staggerItem: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+// ─── SectionDivider ─────────────────────────────────────
 export const SectionDivider = () => (
-  <div className="flex justify-center py-4">
+  <div className="flex items-center justify-center gap-3 py-6">
     <motion.div
-      initial={{ scaleX: 0 }}
-      whileInView={{ scaleX: 1 }}
+      initial={{ scaleX: 0, opacity: 0 }}
+      whileInView={{ scaleX: 1, opacity: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="h-px w-32 bg-gradient-to-r from-transparent via-primary/40 to-transparent"
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="h-px w-16 origin-right bg-gradient-to-r from-transparent to-primary/30"
+    />
+    <motion.div
+      initial={{ scale: 0 }}
+      whileInView={{ scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: 0.2 }}
+      className="h-1.5 w-1.5 rounded-full bg-primary/50"
+    />
+    <motion.div
+      initial={{ scaleX: 0, opacity: 0 }}
+      whileInView={{ scaleX: 1, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="h-px w-16 origin-left bg-gradient-to-l from-transparent to-primary/30"
     />
   </div>
 );
+
+// ─── SectionWrapper ─────────────────────────────────────
+// Wrap entire sections for consistent fade+scale on scroll
+export const SectionWrapper = ({ children, className = "" }: { children: ReactNode; className?: string }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.12, 0.88, 1], [0.4, 1, 1, 0.4]);
+  const y = useTransform(scrollYProgress, [0, 0.12, 0.88, 1], [30, 0, 0, -20]);
+  const smoothY = useSpring(y, { stiffness: 80, damping: 25 });
+
+  return (
+    <motion.div ref={ref} style={{ opacity, y: smoothY }} className={className}>
+      {children}
+    </motion.div>
+  );
+};

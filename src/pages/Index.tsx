@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -11,19 +11,23 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
 import LoadingScreen from "@/components/LoadingScreen";
-import { SectionDivider } from "@/components/ScrollAnimations";
+import { SectionDivider, SectionWrapper } from "@/components/ScrollAnimations";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
-  const containerRef = useRef(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
     <>
-      {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
-      <div
-        ref={containerRef}
+      <AnimatePresence>
+        {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loading ? 0 : 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
         className={`min-h-screen bg-background scroll-smooth ${loading ? "overflow-hidden h-screen" : ""}`}
       >
         {/* Scroll progress bar */}
@@ -34,21 +38,40 @@ const Index = () => {
 
         <Navbar />
         <HeroSection />
-        <SectionDivider />
-        <AboutSection />
-        <SectionDivider />
-        <SkillsSection />
-        <SectionDivider />
-        <ProjectsSection />
-        <SectionDivider />
-        <TimelineSection />
-        <SectionDivider />
-        <CertificationsSection />
-        <SectionDivider />
-        <ContactSection />
+
+        <SectionWrapper>
+          <SectionDivider />
+          <AboutSection />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
+          <SkillsSection />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
+          <ProjectsSection />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
+          <TimelineSection />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
+          <CertificationsSection />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionDivider />
+          <ContactSection />
+        </SectionWrapper>
+
         <Footer />
         <ChatBot />
-      </div>
+      </motion.div>
     </>
   );
 };
