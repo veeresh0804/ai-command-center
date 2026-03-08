@@ -4,10 +4,10 @@ import { ArrowDown, ExternalLink, Mail } from "lucide-react";
 import NeuralNetwork3D from "./NeuralNetwork3D";
 
 const roles = [
-  "AI / Machine Learning Engineer",
-  "Deep Learning Researcher",
+  "AI & Machine Learning Engineer",
   "Full-Stack Developer",
-  "NLP Specialist",
+  "NLP & Search Specialist",
+  "Problem Solver",
 ];
 
 const HeroSection = () => {
@@ -42,15 +42,12 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="relative flex min-h-screen items-center justify-center overflow-hidden">
-      {/* Background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(263_84%_52%_/_0.12)_0%,_transparent_70%)]" />
       <div className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-primary/5 blur-[100px]" />
       <div className="absolute bottom-1/4 right-1/4 h-64 w-64 rounded-full bg-secondary/5 blur-[100px]" />
 
-      {/* 3D Neural Network */}
       <NeuralNetwork3D />
 
-      {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -66,11 +63,11 @@ const HeroSection = () => {
             {"// WELCOME TO MY PORTFOLIO"}
           </motion.p>
 
-          <h1 className="mb-4 font-display text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">
+          <h1 className="mb-4 font-display text-3xl font-bold leading-tight md:text-5xl lg:text-6xl">
             Hi, I'm{" "}
-            <span className="gradient-text">Developer</span>
+            <span className="gradient-text">Venna Dhanush</span>
             <br />
-            <span className="neon-text text-primary">Name</span>
+            <span className="neon-text text-primary">Manohara Veeresh</span>
           </h1>
 
           <div className="mb-8 h-8 font-mono text-lg text-muted-foreground md:text-xl">
@@ -81,9 +78,8 @@ const HeroSection = () => {
           </div>
 
           <p className="mx-auto mb-10 max-w-2xl font-body text-lg text-muted-foreground">
-            Building intelligent systems and scalable AI applications.
-            Passionate about pushing the boundaries of machine learning and
-            creating impactful technology.
+            B.Tech CSE (AI & ML) student at CMR College of Engineering, Hyderabad.
+            Building intelligent systems, semantic search platforms, and scalable AI applications.
           </p>
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -104,7 +100,6 @@ const HeroSection = () => {
           </div>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
