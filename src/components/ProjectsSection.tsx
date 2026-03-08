@@ -107,6 +107,12 @@ const ProjectsSection = () => {
             </ScrollReveal>
           ))}
         </div>
+
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+          image={selectedProject ? projectImages[selectedProject.title] : undefined}
+        />
       </div>
     </section>
   );
