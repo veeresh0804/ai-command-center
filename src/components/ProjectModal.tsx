@@ -100,6 +100,8 @@ const ProjectModal = forwardRef<HTMLDivElement, ProjectModalProps>(({ project, o
       )}
     </AnimatePresence>
   );
-};
+});
+
+ProjectModal.displayName = "ProjectModal";
 
 export default ProjectModal;
