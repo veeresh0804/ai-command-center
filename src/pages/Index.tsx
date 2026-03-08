@@ -28,7 +28,6 @@ const Index = () => {
       >
         {/* Scroll progress bar */}
         <motion.div
-          style={{ scaleX }}
           className="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left"
           style={{ scaleX, background: "linear-gradient(90deg, hsl(183 100% 50%), hsl(263 84% 52%))" }}
         />
