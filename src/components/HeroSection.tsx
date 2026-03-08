@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { ArrowDown, ExternalLink, Mail } from "lucide-react";
+import { ArrowDown, ExternalLink, Mail, Download } from "lucide-react";
 import NeuralNetwork3D from "./NeuralNetwork3D";
+import FloatingTechIcons from "./FloatingTechIcons";
 
 const roles = [
   "AI & Machine Learning Engineer",
@@ -62,6 +63,7 @@ const HeroSection = () => {
       </motion.div>
 
       <NeuralNetwork3D />
+      <FloatingTechIcons />
 
       {/* Content with scroll parallax */}
       <motion.div
@@ -145,6 +147,13 @@ const HeroSection = () => {
             >
               <Mail className="h-4 w-4" />
               CONTACT ME
+            </a>
+            <a
+              href="#"
+              className="flex items-center gap-2 rounded-lg border border-accent/30 px-8 py-3 font-display text-sm font-semibold tracking-wider text-accent transition-all hover:bg-accent/10"
+            >
+              <Download className="h-4 w-4" />
+              RESUME
             </a>
           </motion.div>
         </motion.div>
