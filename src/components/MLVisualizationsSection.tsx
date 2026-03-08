@@ -129,7 +129,7 @@ const NeuralNetViz = () => {
 };
 
 // ─── Decision Tree Visualization ───
-type TreeNode = { label: string; yes?: TreeNode; no?: TreeNode; result?: string };
+type TreeNode = { label: string; yes?: TreeNode; no?: TreeNode; result?: string } | { result: string; label?: string; yes?: undefined; no?: undefined };
 
 const treeData: TreeNode = {
   label: "Temperature > 25°C?",
