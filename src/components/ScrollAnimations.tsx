@@ -19,6 +19,7 @@ export const ScrollReveal = forwardRef<HTMLDivElement, ScrollRevealProps>(({ chi
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, ...dirMap[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
