@@ -72,7 +72,7 @@ export const timelineData = [
   {
     year: "2023",
     title: "Started BTech in CSE (AI & ML)",
-    description: "Joined CMR College of Engineering and Technology, Hyderabad, pursuing Computer Science with specialization in AI and Machine Learning.",
+    description: "Joined CMR College of Engineering and Technology, Hyderabad, pursuing Computer Science with specialization in AI and Machine Learning. Maintaining CGPA of 8.42.",
     icon: "Brain",
   },
   {
@@ -108,3 +108,17 @@ export const navLinks = [
   { label: "Experience", href: "#timeline" },
   { label: "Contact", href: "#contact" },
 ];
+
+export const personalInfo = {
+  name: "Venna Dhanush Siva Sai Manohara Veeresh",
+  shortName: "Venna Dhanush Manohara Veeresh",
+  email: "manoharaveeresh0804@gmail.com",
+  phone: "+91 8125204479",
+  location: "Hyderabad, Telangana",
+  linkedin: "https://linkedin.com/in/vennaveeresh",
+  github: "https://github.com/veeresh0804",
+  university: "CMR College of Engineering and Technology",
+  degree: "B.Tech in CSE (AI & ML)",
+  cgpa: "8.42",
+  availableFor: "Internship from Jan 2026",
+};
