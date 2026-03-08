@@ -36,9 +36,9 @@ const skillCategories = [
   },
 ];
 
-function SkillNode({ position, name, color, size = 0.12 }: {
+const SkillNode = forwardRef<THREE.Group, {
   position: [number, number, number]; name: string; color: string; size?: number;
-}) {
+}>(({ position, name, color, size = 0.12 }, ref) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
 
@@ -49,7 +49,7 @@ function SkillNode({ position, name, color, size = 0.12 }: {
   });
 
   return (
-    <group position={position}>
+    <group ref={ref} position={position}>
       <mesh
         ref={meshRef}
         onPointerOver={() => setHovered(true)}
@@ -82,7 +82,9 @@ function SkillNode({ position, name, color, size = 0.12 }: {
       </Billboard>
     </group>
   );
-}
+});
+
+SkillNode.displayName = "SkillNode";
 
 function CategoryRing({ category, index }: { category: typeof skillCategories[0]; index: number }) {
   const groupRef = useRef<THREE.Group>(null);
