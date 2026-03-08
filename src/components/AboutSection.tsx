@@ -27,22 +27,22 @@ const AboutSection = () => {
             {
               icon: User,
               title: "Who I Am",
-              description: "A passionate AI/ML engineer dedicated to building intelligent systems that solve real-world problems. I thrive at the intersection of research and application.",
+              description: "A driven CSE (AI & ML) student passionate about building intelligent systems — from semantic search platforms to smart safety monitoring solutions.",
             },
             {
               icon: GraduationCap,
               title: "Education",
-              description: "Pursuing BTech in Artificial Intelligence and Machine Learning, with a strong foundation in mathematics, statistics, and computer science.",
+              description: "B.Tech in CSE (AI & ML) at CMR College of Engineering & Technology, Hyderabad with 8.42 CGPA. Previously scored 880/1000 in 10+2 MPC.",
             },
             {
               icon: Target,
               title: "Focus Areas",
-              description: "Deep learning, natural language processing, computer vision, and scalable ML infrastructure. Always exploring cutting-edge research.",
+              description: "AI-powered search systems, NLP, web development, real-time monitoring, and building scalable modular architectures for intelligent applications.",
             },
             {
               icon: Sparkles,
               title: "Career Goals",
-              description: "To lead AI innovation in building products that augment human capabilities and create meaningful impact through technology.",
+              description: "Seeking internship opportunities from Jan 2026. Aspiring to work on cutting-edge AI products that solve real-world problems at scale.",
             },
           ].map((item, i) => (
             <motion.div

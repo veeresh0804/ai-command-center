@@ -1,11 +1,9 @@
-import { useRef, useMemo } from "react";
+import { useMemo, forwardRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
 function NeuralParticles() {
-  const ref = useRef<THREE.Points>(null);
-  
   const positions = useMemo(() => {
     const pos = new Float32Array(2000 * 3);
     for (let i = 0; i < 2000; i++) {
@@ -19,30 +17,12 @@ function NeuralParticles() {
     return pos;
   }, []);
 
-  useFrame((_, delta) => {
-    if (ref.current) {
-      ref.current.rotation.y += delta * 0.1;
-      ref.current.rotation.x += delta * 0.05;
-    }
-  });
-
   return (
-    <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
-      <PointMaterial
-        transparent
-        color="#00F5FF"
-        size={0.02}
-        sizeAttenuation
-        depthWrite={false}
-        opacity={0.8}
-      />
-    </Points>
+    <RotatingPoints positions={positions} color="#00F5FF" size={0.02} speedY={0.1} speedX={0.05} />
   );
 }
 
 function InnerCore() {
-  const ref = useRef<THREE.Points>(null);
-  
   const positions = useMemo(() => {
     const pos = new Float32Array(500 * 3);
     for (let i = 0; i < 500; i++) {
@@ -56,26 +36,35 @@ function InnerCore() {
     return pos;
   }, []);
 
+  return (
+    <RotatingPoints positions={positions} color="#7C3AED" size={0.03} speedY={-0.2} speedX={0} speedZ={0.1} />
+  );
+}
+
+function RotatingPoints({ positions, color, size, speedY, speedX = 0, speedZ = 0 }: {
+  positions: Float32Array; color: string; size: number; speedY: number; speedX?: number; speedZ?: number;
+}) {
+  const ref = React.useRef<THREE.Points>(null);
+
   useFrame((_, delta) => {
     if (ref.current) {
-      ref.current.rotation.y -= delta * 0.2;
-      ref.current.rotation.z += delta * 0.1;
+      ref.current.rotation.y += delta * speedY;
+      ref.current.rotation.x += delta * speedX;
+      ref.current.rotation.z += delta * speedZ;
     }
   });
 
   return (
-    <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
-      <PointMaterial
-        transparent
-        color="#7C3AED"
-        size={0.03}
-        sizeAttenuation
-        depthWrite={false}
-        opacity={0.9}
-      />
-    </Points>
+    <points ref={ref}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+      </bufferGeometry>
+      <pointsMaterial transparent color={color} size={size} sizeAttenuation depthWrite={false} opacity={0.8} />
+    </points>
   );
 }
+
+import React from "react";
 
 const NeuralNetwork3D = () => {
   return (
