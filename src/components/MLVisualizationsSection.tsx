@@ -135,13 +135,13 @@ const treeData: TreeNode = {
   label: "Temperature > 25°C?",
   yes: {
     label: "Humidity > 60%?",
-    yes: { label: "Rainfall > 200mm?", yes: { result: "🌾 Rice" }, no: { result: "🌽 Maize" } },
-    no: { result: "🌻 Sunflower" },
+    yes: { label: "Rainfall > 200mm?", yes: { label: "🌾 Rice", result: "🌾 Rice" }, no: { label: "🌽 Maize", result: "🌽 Maize" } },
+    no: { label: "🌻 Sunflower", result: "🌻 Sunflower" },
   },
   no: {
     label: "Soil pH > 6.5?",
-    yes: { result: "🌿 Wheat" },
-    no: { result: "🥔 Potato" },
+    yes: { label: "🌿 Wheat", result: "🌿 Wheat" },
+    no: { label: "🥔 Potato", result: "🥔 Potato" },
   },
 };
 
