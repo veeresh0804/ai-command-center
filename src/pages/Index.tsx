@@ -29,9 +29,7 @@ const Index = () => {
     <>
       <CustomCursor />
 
-      <AnimatePresence>
-        {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
+      {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
 
       <div
         className={`min-h-screen bg-background scroll-smooth transition-opacity duration-700 ${loading ? "opacity-0 overflow-hidden h-screen" : "opacity-100"}`}
