@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Bot } from "lucide-react";
 
@@ -8,7 +8,7 @@ const initialMessages: Message[] = [
   { role: "assistant", content: "Hello! I'm Veeresh's AI assistant. Ask me about his projects, skills, or experience!" },
 ];
 
-const ChatBot = () => {
+const ChatBot = forwardRef<HTMLDivElement>((_, ref) => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");

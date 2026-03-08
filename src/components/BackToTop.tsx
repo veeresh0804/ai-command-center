@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 
-const BackToTop = () => {
+const BackToTop = forwardRef<HTMLDivElement>((_, ref) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -27,6 +27,8 @@ const BackToTop = () => {
       )}
     </AnimatePresence>
   );
-};
+});
+
+BackToTop.displayName = "BackToTop";
 
 export default BackToTop;
