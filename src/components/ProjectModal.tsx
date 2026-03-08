@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink, Github } from "lucide-react";
 
@@ -18,7 +19,7 @@ interface ProjectModalProps {
   image?: string;
 }
 
-const ProjectModal = ({ project, onClose, image }: ProjectModalProps) => {
+const ProjectModal = forwardRef<HTMLDivElement, ProjectModalProps>(({ project, onClose, image }, ref) => {
   if (!project) return null;
 
   return (
