@@ -7,8 +7,6 @@ import StatsSection from "@/components/StatsSection";
 import SkillsSection from "@/components/SkillsSection";
 import SkillsGalaxy from "@/components/SkillsGalaxy";
 import ProjectsSection from "@/components/ProjectsSection";
-import ProjectPlayground from "@/components/ProjectPlayground";
-import MLVisualizationsSection from "@/components/MLVisualizationsSection";
 import TimelineSection from "@/components/TimelineSection";
 import CertificationsSection from "@/components/CertificationsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -54,8 +52,6 @@ const Index = () => {
         <SectionWrapper><SectionDivider /><SkillsSection /></SectionWrapper>
         <SectionWrapper><SectionDivider /><SkillsGalaxy /></SectionWrapper>
         <SectionWrapper><SectionDivider /><ProjectsSection /></SectionWrapper>
-        <SectionWrapper><SectionDivider /><ProjectPlayground /></SectionWrapper>
-        <SectionWrapper><SectionDivider /><MLVisualizationsSection /></SectionWrapper>
         <SectionWrapper><SectionDivider /><TimelineSection /></SectionWrapper>
         <SectionWrapper><SectionDivider /><CertificationsSection /></SectionWrapper>
         <SectionWrapper><SectionDivider /><TestimonialsSection /></SectionWrapper>
