@@ -2,6 +2,15 @@ import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Github, Filter } from "lucide-react";
 import { projectsData } from "@/data/portfolio";
+import projectShodhani from "@/assets/project-shodhani.jpg";
+import projectArivucode from "@/assets/project-arivucode.jpg";
+import projectEraksha from "@/assets/project-eraksha.jpg";
+
+const projectImages: Record<string, string> = {
+  "ShodhaniAI": projectShodhani,
+  "ArivuCode": projectArivucode,
+  "eRaksha Sentinel": projectEraksha,
+};
 
 const categories = ["All", "AI", "Machine Learning", "Web", "Systems"];
 
@@ -57,12 +66,12 @@ const ProjectsSection = () => {
               className="glass-card hover-glow group overflow-hidden rounded-xl border transition-all"
             >
               {/* Card header gradient */}
-              <div className="h-40 w-full bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/10 p-4">
-                <div className="flex h-full items-center justify-center">
-                  <span className="font-display text-5xl font-bold text-primary/20">
-                    {project.title.charAt(0)}
-                  </span>
-                </div>
+              <div className="h-40 w-full overflow-hidden">
+                <img
+                  src={projectImages[project.title] || ""}
+                  alt={project.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
 
               <div className="p-6">
