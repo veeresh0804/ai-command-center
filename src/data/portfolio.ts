@@ -103,8 +103,6 @@ export const navLinks = [
   { label: "Skills", href: "#skills" },
   { label: "Galaxy", href: "#skills-galaxy" },
   { label: "Projects", href: "#projects" },
-  { label: "AI Lab", href: "#playground" },
-  { label: "ML Viz", href: "#ml-viz" },
   { label: "Experience", href: "#timeline" },
   { label: "Contact", href: "#contact" },
 ];
