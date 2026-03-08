@@ -99,8 +99,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const skipLoading = () => {
     if (!completedRef.current) {
       completedRef.current = true;
-      setFadeOut(true);
-      setTimeout(onComplete, 300);
+      onComplete();
     }
   };
 
