@@ -118,8 +118,8 @@ export const staggerItem: Variants = {
 };
 
 // ─── SectionDivider ─────────────────────────────────────
-export const SectionDivider = () => (
-  <div className="flex items-center justify-center gap-3 py-6">
+export const SectionDivider = forwardRef<HTMLDivElement>((_, ref) => (
+  <div ref={ref} className="flex items-center justify-center gap-3 py-6">
     <motion.div
       initial={{ scaleX: 0, opacity: 0 }}
       whileInView={{ scaleX: 1, opacity: 1 }}
@@ -142,7 +142,9 @@ export const SectionDivider = () => (
       className="h-px w-16 origin-left bg-gradient-to-l from-transparent to-primary/30"
     />
   </div>
-);
+));
+
+SectionDivider.displayName = "SectionDivider";
 
 // ─── SectionWrapper ─────────────────────────────────────
 // Wrap entire sections for consistent fade+scale on scroll
