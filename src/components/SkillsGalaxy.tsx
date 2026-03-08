@@ -177,7 +177,7 @@ const CentralCore = forwardRef<THREE.Group>((_, ref) => {
 
 CentralCore.displayName = "CentralCore";
 
-function GalaxyScene() {
+const GalaxyScene = forwardRef<THREE.Group>((_, ref) => {
   const { camera } = useThree();
 
   useFrame((state) => {
@@ -196,7 +196,9 @@ function GalaxyScene() {
       ))}
     </>
   );
-}
+});
+
+GalaxyScene.displayName = "GalaxyScene";
 
 const SkillsGalaxy = () => {
   return (
