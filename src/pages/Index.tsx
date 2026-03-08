@@ -59,7 +59,7 @@ const Index = () => {
         <Footer />
         <ChatBot />
         <BackToTop />
-      </motion.div>
+      </div>
     </>
   );
 };
