@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -9,21 +9,27 @@ import CertificationsSection from "@/components/CertificationsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const Index = () => {
+  const [loading, setLoading] = useState(true);
+
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <TimelineSection />
-      <CertificationsSection />
-      <ContactSection />
-      <Footer />
-      <ChatBot />
-    </div>
+    <>
+      {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
+      <div className={`min-h-screen bg-background ${loading ? "overflow-hidden h-screen" : ""}`}>
+        <Navbar />
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <TimelineSection />
+        <CertificationsSection />
+        <ContactSection />
+        <Footer />
+        <ChatBot />
+      </div>
+    </>
   );
 };
 
