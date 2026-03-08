@@ -9,7 +9,7 @@ interface ScrollRevealProps {
   className?: string;
 }
 
-export const ScrollReveal = ({ children, direction = "up", delay = 0, className = "" }: ScrollRevealProps) => {
+export const ScrollReveal = forwardRef<HTMLDivElement, ScrollRevealProps>(({ children, direction = "up", delay = 0, className = "" }, ref) => {
   const dirMap = {
     up: { y: 60, x: 0 },
     down: { y: -60, x: 0 },
