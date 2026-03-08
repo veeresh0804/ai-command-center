@@ -1,4 +1,4 @@
-import { useRef, ReactNode } from "react";
+import { useRef, forwardRef, ReactNode } from "react";
 import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 
 // ─── ScrollReveal ───────────────────────────────────────
@@ -143,20 +143,28 @@ export const SectionDivider = () => (
 
 // ─── SectionWrapper ─────────────────────────────────────
 // Wrap entire sections for consistent fade+scale on scroll
-export const SectionWrapper = ({ children, className = "" }: { children: ReactNode; className?: string }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
+export const SectionWrapper = forwardRef<HTMLDivElement, { children: ReactNode; className?: string }>(
+  ({ children, className = "" }, forwardedRef) => {
+    const innerRef = useRef(null);
+    const targetRef = (forwardedRef as React.RefObject<HTMLDivElement>) || innerRef;
+    
+    const { scrollYProgress } = useScroll({
+      target: innerRef,
+      offset: ["start end", "end start"],
+    });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.12, 0.88, 1], [0.4, 1, 1, 0.4]);
-  const y = useTransform(scrollYProgress, [0, 0.12, 0.88, 1], [30, 0, 0, -20]);
-  const smoothY = useSpring(y, { stiffness: 80, damping: 25 });
+    const opacity = useTransform(scrollYProgress, [0, 0.1, 0.85, 1], [0, 1, 1, 0]);
+    const y = useTransform(scrollYProgress, [0, 0.1, 0.85, 1], [40, 0, 0, -20]);
+    const scale = useTransform(scrollYProgress, [0, 0.1, 0.85, 1], [0.97, 1, 1, 0.98]);
+    const smoothY = useSpring(y, { stiffness: 100, damping: 25 });
+    const smoothScale = useSpring(scale, { stiffness: 100, damping: 25 });
 
-  return (
-    <motion.div ref={ref} style={{ opacity, y: smoothY }} className={className}>
-      {children}
-    </motion.div>
-  );
-};
+    return (
+      <motion.div ref={innerRef} style={{ opacity, y: smoothY, scale: smoothScale }} className={className}>
+        {children}
+      </motion.div>
+    );
+  }
+);
+
+SectionWrapper.displayName = "SectionWrapper";
