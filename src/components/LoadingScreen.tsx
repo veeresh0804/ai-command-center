@@ -20,7 +20,7 @@ const bootSequence = [
 // Glitch characters for the glitch effect
 const glitchChars = "!@#$%^&*()_+-=[]{}|;:',.<>?/~`";
 
-const GlitchText = ({ text, isActive }: { text: string; isActive: boolean }) => {
+const GlitchText = forwardRef<HTMLSpanElement, { text: string; isActive: boolean }>(({ text, isActive }, ref) => {
   const [display, setDisplay] = useState(text);
 
   useEffect(() => {
@@ -37,8 +37,10 @@ const GlitchText = ({ text, isActive }: { text: string; isActive: boolean }) => 
     return () => clearInterval(interval);
   }, [text, isActive]);
 
-  return <span>{display}</span>;
-};
+  return <span ref={ref}>{display}</span>;
+});
+
+GlitchText.displayName = "GlitchText";
 
 // Floating particles for background ambiance
 const Particles = () => {
