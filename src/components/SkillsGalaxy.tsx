@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo, useState, forwardRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Text, Billboard } from "@react-three/drei";
 import * as THREE from "three";
@@ -36,9 +36,9 @@ const skillCategories = [
   },
 ];
 
-function SkillNode({ position, name, color, size = 0.12 }: {
+const SkillNode = forwardRef<THREE.Group, {
   position: [number, number, number]; name: string; color: string; size?: number;
-}) {
+}>(({ position, name, color, size = 0.12 }, ref) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
 
@@ -49,7 +49,7 @@ function SkillNode({ position, name, color, size = 0.12 }: {
   });
 
   return (
-    <group position={position}>
+    <group ref={ref} position={position}>
       <mesh
         ref={meshRef}
         onPointerOver={() => setHovered(true)}
@@ -82,9 +82,11 @@ function SkillNode({ position, name, color, size = 0.12 }: {
       </Billboard>
     </group>
   );
-}
+});
 
-function CategoryRing({ category, index }: { category: typeof skillCategories[0]; index: number }) {
+SkillNode.displayName = "SkillNode";
+
+const CategoryRing = forwardRef<THREE.Group, { category: typeof skillCategories[0]; index: number }>(({ category, index }, ref) => {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((_, delta) => {
@@ -125,9 +127,11 @@ function CategoryRing({ category, index }: { category: typeof skillCategories[0]
       ))}
     </group>
   );
-}
+});
 
-function CentralCore() {
+CategoryRing.displayName = "CategoryRing";
+
+const CentralCore = forwardRef<THREE.Group>((_, ref) => {
   const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
@@ -138,7 +142,7 @@ function CentralCore() {
   });
 
   return (
-    <group>
+    <group ref={ref}>
       <mesh ref={meshRef}>
         <icosahedronGeometry args={[0.6, 1]} />
         <meshStandardMaterial
@@ -169,9 +173,11 @@ function CentralCore() {
       </Billboard>
     </group>
   );
-}
+});
 
-function GalaxyScene() {
+CentralCore.displayName = "CentralCore";
+
+const GalaxyScene = forwardRef<THREE.Group>((_, ref) => {
   const { camera } = useThree();
 
   useFrame((state) => {
@@ -190,7 +196,9 @@ function GalaxyScene() {
       ))}
     </>
   );
-}
+});
+
+GalaxyScene.displayName = "GalaxyScene";
 
 const SkillsGalaxy = () => {
   return (
